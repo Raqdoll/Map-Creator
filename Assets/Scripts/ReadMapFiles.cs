@@ -6,13 +6,17 @@ using System;
 
 public class ReadMapFiles : MonoBehaviour
 {
+    //Used to search for the wanted map from the list of maps.
+    //Maps are in the list as text files.
+    //Insert the ID of the map you want to find from the list.
+    //Map is returned as a grid of values for each tile of the map.
+    
+    //List of maps
     public List<TextAsset> maps;
+    //Amount of rows before the actual tile data starts in the text file
     public int amountOfRowsBeforeTileData = 2;
-    void Start()
-    {
 
-    }
-
+    //Call this with the ID of the map you want to find. String can be turned to int if needed
     public int[,] SearchMapByID(string id)
     {
         string comparison = "";
@@ -25,7 +29,7 @@ public class ReadMapFiles : MonoBehaviour
             comparison = textLines[1].ToString();
 
             //Turn strings to int for comparison
-            int i_id = int.Parse(id);
+            int i_id = int.Parse(id); // If function is used with int input instead of string, remove parse.
             int i_comparison = int.Parse(comparison);
 
             //Compare the file to given id
@@ -36,7 +40,7 @@ public class ReadMapFiles : MonoBehaviour
 
                 //Get the size of the map
                 int rowLenght = textLines[2].Length;
-                int rowHeight = textLines.Length - amountOfRowsBeforeTileData -1; //-1 row after
+                int rowHeight = textLines.Length - amountOfRowsBeforeTileData -1; //-1 because file has empty row at the end
                 Debug.Log(rowLenght + " x " + rowHeight);
 
                 //Create the output grid, then assign the values
